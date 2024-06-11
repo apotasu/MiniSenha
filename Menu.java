@@ -107,7 +107,7 @@ public class Menu{
         
     }
     public void JogoPrincipal(){
-        Pino[] pinos = new Pino[6];
+        PinoColorido[] pinos = new PinoColorido[6];
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
@@ -115,7 +115,7 @@ public class Menu{
 
         JPanel panel = new JPanel(new GridLayout(7, 1));
         for (int i = 0; i<=5; i++){
-            Pino pino = new Pino();
+            PinoColorido pino = new PinoColorido();
             pinos[i] = pino;
             JButton button = new JButton("⬤");
             button.addActionListener(event -> button.setForeground(pino.getNextColor()));
