@@ -12,6 +12,11 @@ public class Menu{
     private JFrame Jogo;
     private JTextField Senha;
     private JTextField Tentativa;
+    private MindGame mindGame;
+
+    public Menu(){
+        this.mindGame = new MindGame();
+    }
     
     public void ConfigMenu() throws IOException{
         Config = new JFrame("Configurações");
@@ -102,7 +107,7 @@ public class Menu{
         
     }
     public void JogoPrincipal(){
-        Pino pino = new Pino();
+        Pino[] pinos = new Pino[6];
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
@@ -110,8 +115,10 @@ public class Menu{
 
         JPanel panel = new JPanel(new GridLayout(7, 1));
         for (int i = 0; i<=5; i++){
+            Pino pino = new Pino();
+            pinos[i] = pino;
             JButton button = new JButton("⬤");
-            button.addActionListener(event -> button.setForeground(pino.setProxCor()));
+            button.addActionListener(event -> button.setForeground(pino.getNextColor()));
             button.setBackground(new Color(60, 65, 70));
             panel.add(button);
         }
@@ -123,6 +130,13 @@ public class Menu{
         frame.add(panel);
         frame.pack();
         frame.setVisible(true);
+    }
+
+    public void VerificarResultado(){
+        // Verificar se o jogador acertou a senha
+        // Se sim, chamar ResultadoVitoria()
+        // Se não, chamar ResultadoDerrota()
+
     }
     
     public void ResultadoVitoria(){

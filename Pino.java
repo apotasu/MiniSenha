@@ -9,26 +9,48 @@ public class Pino {
         color = new Color(0,0,0);
         cor = Cor.AMARELO;
     }
-    public Color setProxCor(){
+    public void setProxCor(){
         switch (cor) {
             case PRETO:
-                return color = new Color(242, 255,0);
+                color = new Color(242, 255,0);
+                cor = Cor.AMARELO;
+                break;
             case AMARELO:
-                return color = new Color(255, 0,0);
+                color = new Color(255, 0,0);
+                cor = Cor.VERMELHO;
+                break;
             case VERMELHO:
-                return color = new Color(0, 0,255);
+                color = new Color(0, 0,255);
+                cor = Cor.AZUL;
+                break;
             case AZUL:
-                return color = new Color(0, 255,0);
+                color = new Color(0, 255,0);
+                cor = Cor.VERDE;
+                break;
             case VERDE:
-                return color = new Color(110, 0,150);
+                color = new Color(110, 0,150);
+                cor = Cor.ROXO;
+                break;
             case ROXO:
-                return color = new Color(255, 0,0);
+                color = new Color(255, 0,0);
+                cor = Cor.VERMELHO;
+                break;
             default:
-                return color = new Color(255, 0,0);
-               
+                color = new Color(255, 0,0);
+                cor = Cor.VERMELHO;               
         }
     }
+
+    public void setColor(Color color){
+        this.color = color;
+    }
+
     public Color getCor(){
+        return this.color;
+    }
+
+    public Color getNextColor(){
+        setProxCor();
         return this.color;
     }
 }
