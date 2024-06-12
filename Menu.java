@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -6,13 +8,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class Menu{
+public class Menu implements ActionListener{
     private JFrame Menu;
     private JFrame Config;
     private JFrame Jogo;
     private JTextField Senha;
     private JTextField Tentativa;
     private MindGame mindGame;
+    PinoColorido[] pinos;
 
     public Menu(){
         this.mindGame = new MindGame();
@@ -106,8 +109,9 @@ public class Menu{
         gbc.weighty = 1;
         
     }
+    
     public void JogoPrincipal(){
-        PinoColorido[] pinos = new PinoColorido[6];
+        pinos = new PinoColorido[6];
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
@@ -123,7 +127,7 @@ public class Menu{
             panel.add(button);
         }
         JButton Verificar = new JButton("Chutar!");
-        Verificar.addActionListener(event -> ResultadoVitoria());
+        Verificar.addActionListener(event -> actionPerformed(event));
         Verificar.setBackground(new Color(150,150,150));
 
         panel.add(Verificar);
@@ -131,14 +135,8 @@ public class Menu{
         frame.pack();
         frame.setVisible(true);
     }
-
-    public void VerificarResultado(){
-        // Verificar se o jogador acertou a senha
-        // Se sim, chamar ResultadoVitoria()
-        // Se não, chamar ResultadoDerrota()
-
-    }
     
+
     public void ResultadoVitoria(){
         JFrame resultFrame = new JFrame("Vitoria!");
         resultFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -160,15 +158,34 @@ public class Menu{
     }
 
     public void ResultadoDerrota(){
-        JFrame resultFrame = new JFrame("Perdeu!");
-        JLabel vitoriaLabel = new JLabel("Você Perdeu! \n Parabens!");
+        JFrame resultFrame = new JFrame("Derrota!");
         resultFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        vitoriaLabel.setHorizontalAlignment(JLabel.CENTER);
-        resultFrame.add(vitoriaLabel);
-        // Emoji triste
+        JPanel resultPane = new JPanel(new GridBagLayout());
+        BufferedImage myPicture;
+        try {
+            myPicture = ImageIO.read(new File("Derrota.png"));
+            JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+            resultPane.add(picLabel);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }        
+        resultPane.setBackground(new Color(60, 65, 70));
+        resultFrame.add(resultPane);
         resultFrame.pack();
         resultFrame.setSize(520,360);
         resultFrame.setLocationRelativeTo(null);
         resultFrame.setVisible(true);
+    }
+
+    //Precisa definir senha pra funcionar
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        MindGame game = new MindGame();
+        if(game.verificarResultado(pinos)){
+            ResultadoVitoria();
+        } else {
+            ResultadoDerrota();
+        }
+
     }
 }
