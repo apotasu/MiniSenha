@@ -1,9 +1,12 @@
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 import java.util.Random;
 
 
@@ -18,16 +21,16 @@ public class MiniSenha {
         this.modoTeste = teste;
         this.QuantidadePinos = quantidade;
         this.senha = new PinoColorido[quantidade];
-        this.config = new Config(1, frame);
+        this.config = new Config(true, frame);
 
-        if(config.getNumJogadores() == 1)
+        if(config.getNumJogadores()){
             gerarSenha();
         JogoPrincipal(frame);
     }
-
+}
     private void gerarSenha() {
         Random random = new Random();
-        for (int i = 0; i <= 3; i++) {
+        for (int i = 0; i < QuantidadePinos; i++) {
             this.senha[i] = new PinoColorido();
             for(int j = 0; j <= random.nextInt(10); j++){
                 this.senha[i].setProxCor();
@@ -75,6 +78,20 @@ public class MiniSenha {
 
         contentPane.removeAll();
         contentPane.setLayout(new GridLayout(5, 1));
+        if (modoTeste){
+            JFrame modotesteJFrame = new JFrame("Resultado");
+            Container senhaPane = modotesteJFrame.getContentPane();
+            senhaPane.setLayout(new FlowLayout());
+            JLabel senhaLabel = new JLabel("A senha é:" + getSenha()[0].getCor());
+            senhaPane.add(senhaLabel);
+            for (int i = 1; i<QuantidadePinos; i++){
+                JLabel senhaRestante = new JLabel(""+getSenha()[i].getCor());
+                senhaPane.add(senhaRestante);
+            }
+            modotesteJFrame.pack();
+            modotesteJFrame.setVisible(true);
+        }
+
         for (int i = 0; i<QuantidadePinos; i++){
             PinoColorido pino = new PinoColorido();
             pinos[i] = pino;
