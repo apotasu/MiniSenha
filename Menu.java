@@ -41,14 +41,14 @@ public class Menu{
         JButton jogador1Button = new JButton("1 jogador");
         jogador1Button.setBackground(new Color(60,65,70));
         jogador1Button.setForeground(new Color(225, 225, 225));
-        jogador1Button.addActionListener(event ->  new Config(1, Menu));
+        jogador1Button.addActionListener(event ->  new Config(false, Menu));
 
         contentPane.add(jogador1Button, gbc);
         
         JButton jogador2Button = new JButton("2 jogadores");
         jogador2Button.setBackground(new Color(60,65,70));
         jogador2Button.setForeground(new Color(225, 225, 225));
-        jogador2Button.addActionListener(event ->  new Config(2, Menu));
+        jogador2Button.addActionListener(event ->  new Config(true, Menu));
 
         contentPane.add(jogador2Button, gbc);
         
