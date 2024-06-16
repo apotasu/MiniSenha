@@ -31,8 +31,8 @@ public class PinoColorido {
                 cor = Cor.ROXO;
                 break;
             case ROXO:
-                color = new Color(255, 0,0);
-                cor = Cor.VERMELHO;
+                color = new Color(0,0,0);
+                cor = Cor.PRETO;
                 break;
             default:
                 color = new Color(255, 0,0);

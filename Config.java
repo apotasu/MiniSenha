@@ -64,13 +64,13 @@ public class Config {
         configPane.add(QuantPinos, gbc);
         
         JButton ConfigOk = new JButton("Começar Jogo");
-        ConfigOk.addActionListener(event -> new MindGame(frame));
+        ConfigOk.addActionListener(event -> new MiniSenha(frame, false, Integer.parseInt(QuantPinos.getText())));
         ConfigOk.setForeground(new Color(225, 225, 225));
         ConfigOk.setBackground(new Color(60, 65, 70));
         configPane.add(ConfigOk,gbc);
         
         JButton TesteButton = new JButton("Modo Teste");
-        TesteButton.addActionListener(event -> new MindGame(frame));
+        TesteButton.addActionListener(event -> new MiniSenha(frame, true, Integer.parseInt(QuantPinos.getText())));
         TesteButton.setForeground(new Color(225, 225, 225));
         TesteButton.setBackground(new Color(60, 65, 70));
         configPane.add(TesteButton,gbc);
