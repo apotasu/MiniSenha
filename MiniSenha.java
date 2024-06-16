@@ -39,6 +39,10 @@ public class MiniSenha {
                 this.senha[i].setProxCor();
             }
         }
+        System.out.println("Senha gerada:");
+        for (int i = 0; i < QuantidadePinos; i++) {
+            System.out.println(this.senha[i].getCor());
+        }
     }
 
     public void setSenha(PinoColorido[] senha) {
