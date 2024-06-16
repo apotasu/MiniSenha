@@ -48,12 +48,32 @@ public class Config {
         Tentativas.setBackground(new Color(60, 65, 70));
         configPane.add(Tentativas,gbc);
 
+        BufferedImage QuantPinosImg;
+        try {
+            QuantPinosImg = ImageIO.read(new File("QuantidadePinos.png"));
+            JLabel picLabel = new JLabel(new ImageIcon(QuantPinosImg));
+            configPane.add(picLabel,gbc);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        JTextField QuantPinos = new JTextField(2);
+        QuantPinos.setForeground(new Color(225, 225, 225));
+        QuantPinos.setBackground(new Color(60, 65, 70));
+        configPane.add(QuantPinos, gbc);
         
-        JButton ConfigOk = new JButton("Começar");
+        JButton ConfigOk = new JButton("Começar Jogo");
         ConfigOk.addActionListener(event -> new MindGame(frame));
         ConfigOk.setForeground(new Color(225, 225, 225));
         ConfigOk.setBackground(new Color(60, 65, 70));
         configPane.add(ConfigOk,gbc);
+        
+        JButton TesteButton = new JButton("Modo Teste");
+        TesteButton.addActionListener(event -> new MindGame(frame));
+        TesteButton.setForeground(new Color(225, 225, 225));
+        TesteButton.setBackground(new Color(60, 65, 70));
+        configPane.add(TesteButton,gbc);
 
         frame.pack();
         frame.setSize(520,360);

@@ -7,19 +7,12 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class Menu{
-    private JFrame Menu;
-    private JFrame Config;
-    private JFrame Jogo;
-    private JTextField Senha;
-    private JTextField Tentativa;
-    private MindGame mindGame;
     PinoColorido[] pinos;
-
+    
     public Menu(){
         MainMenu();
-
-
-}
+    }
+    
     public void MainMenu(){
         JFrame Menu = new JFrame("Menu");
         GridBagConstraints gbc = new GridBagConstraints();
