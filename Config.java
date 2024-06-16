@@ -20,7 +20,6 @@ public class Config {
 
     public Config(boolean jogador, JFrame frame) {
         this.numJogadores = jogador;
-        this.numTentativas = 8;
         //??
         
         GridBagConstraints gbc = new GridBagConstraints();
@@ -57,7 +56,7 @@ public class Config {
             e.printStackTrace();
         }
         
-        JTextField Tentativas = new JTextField(2);
+        JTextField Tentativas = new JTextField(10);
         Tentativas.setForeground(new Color(225, 225, 225));
         Tentativas.setBackground(new Color(60, 65, 70));
         configPane.add(Tentativas,gbc);
@@ -78,13 +77,13 @@ public class Config {
         configPane.add(QuantPinos, gbc);
         
         JButton ConfigOk = new JButton("Começar Jogo");
-        ConfigOk.addActionListener(event -> new MiniSenha(frame, false, Integer.parseInt(QuantPinos.getText())));
+        ConfigOk.addActionListener(event -> new MiniSenha(frame, false, Integer.parseInt(QuantPinos.getText()), Integer.parseInt(Tentativas.getText())));
         ConfigOk.setForeground(new Color(225, 225, 225));
         ConfigOk.setBackground(new Color(60, 65, 70));
         configPane.add(ConfigOk,gbc);
         
         JButton TesteButton = new JButton("Modo Teste");
-        TesteButton.addActionListener(event -> new MiniSenha(frame, true, Integer.parseInt(QuantPinos.getText())));
+        TesteButton.addActionListener(event -> new MiniSenha(frame, true, Integer.parseInt(QuantPinos.getText()), Integer.parseInt(Tentativas.getText())));
         TesteButton.setForeground(new Color(225, 225, 225));
         TesteButton.setBackground(new Color(60, 65, 70));
         configPane.add(TesteButton,gbc);

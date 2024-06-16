@@ -30,7 +30,6 @@ public class Resultados {
             e.printStackTrace();
         }
         resultPane.setBackground(new Color(60, 65, 70));
-       // frame.add(resultPane);
         frame.pack();
         frame.setSize(520,360);
         frame.setLocationRelativeTo(null);
