@@ -16,23 +16,37 @@ import javax.swing.JTextField;
 public class Config {
     private int numTentativas;
     private int numMaximoTentativas = 10;
+    private boolean numJogadores;
 
-    private int numJogadores;
-
-    public Config(int numJogadores, JFrame frame) {
-        this.numJogadores = numJogadores;
+    public Config(boolean jogador, JFrame frame) {
+        this.numJogadores = jogador;
         this.numTentativas = 8;
+        //??
         
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.anchor = GridBagConstraints.NORTH;
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        
+
         Container configPane = frame.getContentPane();
         configPane.removeAll();
         configPane.setLayout(new GridBagLayout());
         configPane.setBackground(new Color(60, 65, 70));
         
+        if (jogador == true){
+            JLabel senhaLabel = new JLabel("Digite a senha:");
+            senhaLabel.setForeground(new Color(225, 225, 225));
+            senhaLabel.setBackground(new Color(60, 65, 70));
+            JTextField senhaField = new JTextField(6);
+            senhaField.setForeground(new Color(225, 225, 225));
+            senhaField.setBackground(new Color(60, 65, 70));
+            configPane.add(senhaLabel,gbc);
+            configPane.add(senhaField,gbc);
+
+        }
+
         BufferedImage myPicture;
         try {
             myPicture = ImageIO.read(new File("titleTentativa.png"));
@@ -90,7 +104,7 @@ public class Config {
         this.numTentativas = numTentativas;
     }
 
-    public int getNumJogadores() {
+    public boolean getNumJogadores() {
         return this.numJogadores;
     }
 }
