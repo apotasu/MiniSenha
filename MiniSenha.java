@@ -4,6 +4,8 @@ import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import java.util.Random;
+
 
 public class MiniSenha {
     private Config config;
@@ -16,13 +18,21 @@ public class MiniSenha {
         this.modoTeste = teste;
         this.QuantidadePinos = quantidade;
         this.senha = new PinoColorido[quantidade];
-        //Pino[] senha = new Pino[6];
-        for (int i = 0; i<QuantidadePinos ; i++){
-            PinoColorido pino = new PinoColorido();
-            pino.setCor(Cor.AMARELO);
-            senha[i]=pino;
-        }
+        this.config = new Config(1, frame);
+
+        if(config.getNumJogadores() == 1)
+            gerarSenha();
         JogoPrincipal(frame);
+    }
+
+    private void gerarSenha() {
+        Random random = new Random();
+        for (int i = 0; i <= 3; i++) {
+            this.senha[i] = new PinoColorido();
+            for(int j = 0; j <= random.nextInt(10); j++){
+                this.senha[i].setProxCor();
+            }
+        }
     }
 
     public void setSenha(PinoColorido[] senha) {
@@ -44,12 +54,17 @@ public class MiniSenha {
     public void verificarResultado(PinoColorido[] pinos, JFrame frame) {
         Resultados resultado = new Resultados(frame);
         // Verificar se o jogador acertou a senha
+        boolean acertou = true;
         for (int i = 0; i < QuantidadePinos; i++) {
             if (pinos[i].getCor() != senha[i].getCor()) {
-                resultado.ResultadoDerrota();
-            } else {
-                resultado.ResultadoVitoria();
+                acertou = false;
+                break;
             }
+        }
+        if(acertou){
+            resultado.ResultadoVitoria();
+        } else {
+            resultado.ResultadoDerrota();
         }
         
     }

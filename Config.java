@@ -20,7 +20,7 @@ public class Config {
     private int numJogadores;
 
     public Config(int numJogadores, JFrame frame) {
-        this.numJogadores = 1;
+        this.numJogadores = numJogadores;
         this.numTentativas = 8;
         
         GridBagConstraints gbc = new GridBagConstraints();
@@ -88,5 +88,9 @@ public class Config {
             
         }
         this.numTentativas = numTentativas;
+    }
+
+    public int getNumJogadores() {
+        return this.numJogadores;
     }
 }
