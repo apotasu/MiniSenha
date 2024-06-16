@@ -62,6 +62,10 @@ public class MiniSenha {
         // Verificar se o jogador acertou a senha
         for (int i = 0; i < QuantidadePinos; i++) {
             if (pinos[i].getCor() != senha[i].getCor()) {
+                if(count == 0){
+                    resultado.ResultadoDerrota();
+                    return;
+                }
                 TentarDeNovo(frame, i);
                 return;
             } 
@@ -116,6 +120,7 @@ public class MiniSenha {
     }
 
     public void TentarDeNovo(JFrame frame, int posErrado){
+        count--;
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.anchor = GridBagConstraints.NORTH;
