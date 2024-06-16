@@ -11,8 +11,7 @@ public class MindGame {
     private PinoColorido[] pinos;
 
     public MindGame(JFrame frame) {
-        this.senha = new PinoColorido[6];
-        //Pino[] senha = new Pino[6];
+        this.senha = new PinoColorido[4];
         for (int i = 0; i<=3 ; i++){
             PinoColorido pino = new PinoColorido();
             pino.setCor(Cor.AMARELO);
@@ -40,13 +39,17 @@ public class MindGame {
     public void verificarResultado(PinoColorido[] pinos, JFrame frame) {
         Resultados resultado = new Resultados(frame);
         // Verificar se o jogador acertou a senha
+        boolean vitoria = true;
         for (int i = 0; i <= 3; i++) {
             if (pinos[i].getCor() != senha[i].getCor()) {
-                resultado.ResultadoDerrota();;
+                vitoria = false;
+                break;
             }
         }
-        resultado.ResultadoVitoria();
-        
+        if (vitoria)
+            resultado.ResultadoVitoria();
+        else
+            resultado.ResultadoDerrota();
     }
 
     public void JogoPrincipal(JFrame frame){
