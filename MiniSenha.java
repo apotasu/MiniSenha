@@ -60,16 +60,13 @@ public class MiniSenha {
     public void verificarResultado(PinoColorido[] pinos, JFrame frame) {
         Resultados resultado = new Resultados(frame);
         // Verificar se o jogador acertou a senha
-        boolean acertou = true;
         for (int i = 0; i < QuantidadePinos; i++) {
             if (pinos[i].getCor() != senha[i].getCor()) {
-                acertou = false;
                 TentarDeNovo(frame, i);
+                return;
             } 
         }
-        if (acertou){
-            resultado.ResultadoVitoria();
-        }
+        resultado.ResultadoVitoria();
         
         /*if(acertou){
             resultado.ResultadoVitoria();
