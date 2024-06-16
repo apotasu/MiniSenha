@@ -82,7 +82,7 @@ public class MiniSenha {
         }
         
         frameSenha.pack();
-        frameSenha.setVisible(true);
+        frameSenha.setVisible(teste);
         JButton Verificar = new JButton("Chutar!");
         Verificar.addActionListener(event -> verificarResultado(pinos, frame));
         //Verificar.addActionListener(event -> actionPerformed(event));
@@ -91,6 +91,6 @@ public class MiniSenha {
         contentPane.add(Verificar);
         //frame.add(contentPane);
         frame.pack();
-        frame.setVisible(teste);
+        frame.setVisible(true);
     }
 }
