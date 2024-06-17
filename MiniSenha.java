@@ -90,7 +90,7 @@ public class MiniSenha {
         Container contentPane = frame.getContentPane();
 
         contentPane.removeAll();
-        contentPane.setLayout(new GridLayout(5, 1));
+        contentPane.setLayout(new GridLayout(1, 5));
         if (modoTeste) {
             JFrame modotesteJFrame = new JFrame("Resultado");
             Container senhaPane = modotesteJFrame.getContentPane();
@@ -156,9 +156,9 @@ public class MiniSenha {
             }
             if (!achou){
                 JLabel pinoAcerto = new JLabel("●");
-                        pinoAcerto.setBackground(new Color(60, 65, 70));
-                        pinoAcerto.setForeground(new Color(255, 255, 255));
-                        configPane.add(pinoAcerto, gbc);
+                pinoAcerto.setBackground(new Color(60, 65, 70));
+                pinoAcerto.setForeground(new Color(255, 255, 255));
+                configPane.add(pinoAcerto, gbc);
             }
         }
         JButton deNovo = new JButton("De novo?");
