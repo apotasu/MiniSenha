@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 
 import java.util.Random;
 
-
 public class MiniSenha {
     private Config config;
     private PinoColorido[] senha;
@@ -26,16 +25,17 @@ public class MiniSenha {
         this.senha = new PinoColorido[quantidade];
         this.config = new Config(true, frame);
         this.count = tentativas;
-        if(config.getNumJogadores()){
+        if (config.getNumJogadores()) {
             gerarSenha();
             JogoPrincipal(frame);
+        }
     }
-}
+
     private void gerarSenha() {
         Random random = new Random();
         for (int i = 0; i < QuantidadePinos; i++) {
             this.senha[i] = new PinoColorido();
-            for(int j = 0; j <= random.nextInt(10); j++){
+            for (int j = 0; j <= random.nextInt(10); j++) {
                 this.senha[i].setProxCor();
             }
         }
@@ -66,45 +66,46 @@ public class MiniSenha {
         // Verificar se o jogador acertou a senha
         for (int i = 0; i < QuantidadePinos; i++) {
             if (pinos[i].getCor() != senha[i].getCor()) {
-                if(count == 0){
+                if (count == 0) {
                     resultado.ResultadoDerrota();
                     return;
                 }
-                TentarDeNovo(frame, i);
+                TentarDeNovo(frame);
                 return;
-            } 
+            }
         }
         resultado.ResultadoVitoria();
-        
-        /*if(acertou){
-            resultado.ResultadoVitoria();
-        } else {
-            resultado.ResultadoDerrota();
-        }
-     */   
+
+        /*
+         * if(acertou){
+         * resultado.ResultadoVitoria();
+         * } else {
+         * resultado.ResultadoDerrota();
+         * }
+         */
     }
 
-    public void JogoPrincipal(JFrame frame){
+    public void JogoPrincipal(JFrame frame) {
         pinos = new PinoColorido[6];
         Container contentPane = frame.getContentPane();
 
         contentPane.removeAll();
         contentPane.setLayout(new GridLayout(5, 1));
-        if (modoTeste){
+        if (modoTeste) {
             JFrame modotesteJFrame = new JFrame("Resultado");
             Container senhaPane = modotesteJFrame.getContentPane();
             senhaPane.setLayout(new FlowLayout());
             JLabel senhaLabel = new JLabel("A senha é:" + getSenha()[0].getCor());
             senhaPane.add(senhaLabel);
-            for (int i = 1; i<QuantidadePinos; i++){
-                JLabel senhaRestante = new JLabel(""+getSenha()[i].getCor());
+            for (int i = 1; i < QuantidadePinos; i++) {
+                JLabel senhaRestante = new JLabel("" + getSenha()[i].getCor());
                 senhaPane.add(senhaRestante);
             }
             modotesteJFrame.pack();
             modotesteJFrame.setVisible(true);
         }
 
-        for (int i = 0; i<QuantidadePinos; i++){
+        for (int i = 0; i < QuantidadePinos; i++) {
             PinoColorido pino = new PinoColorido();
             pinos[i] = pino;
             JButton button = new JButton("⬤");
@@ -114,16 +115,16 @@ public class MiniSenha {
         }
         JButton Verificar = new JButton("Chutar!");
         Verificar.addActionListener(event -> verificarResultado(pinos, frame));
-        //Verificar.addActionListener(event -> actionPerformed(event));
-        Verificar.setBackground(new Color(150,150,150));
+        // Verificar.addActionListener(event -> actionPerformed(event));
+        Verificar.setBackground(new Color(150, 150, 150));
 
         contentPane.add(Verificar);
-        //frame.add(contentPane);
+        // frame.add(contentPane);
         frame.pack();
         frame.setVisible(true);
     }
 
-    public void TentarDeNovo(JFrame frame, int posErrado){
+    public void TentarDeNovo(JFrame frame) {
         count--;
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
@@ -133,21 +134,31 @@ public class MiniSenha {
         configPane.removeAll();
         configPane.setLayout(new GridBagLayout());
         configPane.setBackground(new Color(60, 65, 70));
-        for (int i = 0; i<QuantidadePinos; i++){
-            for (int j = 0; j<i; j++){
-                if (pinos[i]==senha[i]){
-                    JLabel pinoAcerto = new JLabel("●");
-                    pinoAcerto.setBackground(new Color(60, 65, 70));
-                    pinoAcerto.setForeground(new Color(0 ,0, 0));
-                    configPane.add(pinoAcerto, gbc);
-                } else if (pinos[i] == senha[j] ) {
-                    JLabel pinoAcerto = new JLabel("●");
-                    pinoAcerto.setBackground(new Color(60, 65, 70));
-                    pinoAcerto.setForeground(new Color(0 ,0, 0));
-                    configPane.add(pinoAcerto, gbc);
-                } 
+        for (int i = 0; i < QuantidadePinos; i++) {
+            boolean achou = false;
+            if (pinos[i].getCor() == senha[i].getCor()) {
+                JLabel pinoAcerto = new JLabel("●");
+                pinoAcerto.setBackground(new Color(60, 65, 70));
+                pinoAcerto.setForeground(new Color(0, 0, 0));
+                configPane.add(pinoAcerto, gbc);
+                achou = true;
+            } else {
+                for (int j = 0; j < i; j++) {
+                    if (pinos[i].getCor() == senha[j].getCor()) {
+                        JLabel pinoAcerto = new JLabel("●");
+                        pinoAcerto.setBackground(new Color(60, 65, 70));
+                        pinoAcerto.setForeground(new Color(255, 255, 255));
+                        configPane.add(pinoAcerto, gbc);
+                        achou = true;
+                        break;
+                    }
+                }
             }
-            
+            if (!achou){
+                JLabel pinoAcerto = new JLabel("●");
+                pinoAcerto.setBackground(new Color(60, 65, 70));
+                configPane.add(pinoAcerto, gbc);
+            }
         }
         JButton deNovo = new JButton("De novo?");
         deNovo.addActionListener(event -> JogoPrincipal(frame));
