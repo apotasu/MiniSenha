@@ -1,57 +1,48 @@
 import java.awt.Color;
 
 public class PinoColorido {
-    private Cor cor;
-    private Color color;
+    private Cor color;
 
     public PinoColorido(){
-        color = new Color(0,0,0);
-        cor = Cor.PRETO;
+        color = Cor.PRETO;
     }
     public void setProxCor(){
-        switch (cor) {
+        switch (color) {
             case PRETO:
-                color = new Color(242, 255,0);
-                cor = Cor.AMARELO;
+                color = Cor.AMARELO;
                 break;
             case AMARELO:
-                color = new Color(255, 0,0);
-                cor = Cor.VERMELHO;
+                color = Cor.VERMELHO;
                 break;
             case VERMELHO:
-                color = new Color(0, 0,255);
-                cor = Cor.AZUL;
+                color = Cor.AZUL;
                 break;
             case AZUL:
-                color = new Color(0, 255,0);
-                cor = Cor.VERDE;
+                color = Cor.VERDE;
                 break;
             case VERDE:
-                color = new Color(110, 0,150);
-                cor = Cor.ROXO;
+                color = Cor.ROXO;
                 break;
             case ROXO:
-                color = new Color(0,0,0);
-                cor = Cor.PRETO;
+                color = Cor.PRETO;
                 break;
             default:
-                color = new Color(255, 0,0);
-                cor = Cor.VERMELHO;               
+                color = Cor.PRETO;
         }
     }
 
     public Color getNextColor(){
         setProxCor();
-        return this.color;
+        return this.color.color;
     }
 
     public Cor getCor(){
-        return this.cor;
+        return this.color;
     }
 
     //For testing purrpurses ;33
     public void setCor(Cor core){
-        this.cor = core;
+        this.color = core;
     }
 
 }
