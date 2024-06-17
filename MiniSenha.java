@@ -156,8 +156,9 @@ public class MiniSenha {
             }
             if (!achou){
                 JLabel pinoAcerto = new JLabel("●");
-                pinoAcerto.setBackground(new Color(60, 65, 70));
-                configPane.add(pinoAcerto, gbc);
+                        pinoAcerto.setBackground(new Color(60, 65, 70));
+                        pinoAcerto.setForeground(new Color(255, 255, 255));
+                        configPane.add(pinoAcerto, gbc);
             }
         }
         JButton deNovo = new JButton("De novo?");
