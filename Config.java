@@ -78,7 +78,7 @@ public class Config {
         TesteButton.setBackground(new Color(60, 65, 70));
         configPane.add(TesteButton,gbc);
 
-        if (jogador == true){
+      /*  if (jogador == true){
             int count = 0;
             PinoColorido[] pino = new PinoColorido[Integer.parseInt(QuantPinos.getText())];
             JLabel senhaLabel = new JLabel("Digite a senha:");
@@ -89,7 +89,7 @@ public class Config {
             JButton azul = new JButton("AZUL");
             azul.addActionListener(event -> pino[count].setCor(Cor.AZUL));
         }
-
+ */
         frame.pack();
         frame.setSize(520,360);
         frame.setLocationRelativeTo(null);
