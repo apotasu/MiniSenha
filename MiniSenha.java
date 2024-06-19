@@ -23,6 +23,8 @@ public class MiniSenha {
     private int tentativas;
     private JButton deNovo;
     private JLabel numTentativas;
+    private JPanel panelPinos;
+    private Container retryPane;
 
     public MiniSenha(JFrame frame, boolean teste, int quantidade, int tentativas) {
         this.modoTeste = teste;
@@ -85,13 +87,14 @@ public class MiniSenha {
 
     public void TentarDeNovo(JFrame frame){
         count--;
-        Container retryPane = frame.getContentPane();
+        retryPane = frame.getContentPane();
+        frame.setTitle("Mini Senha");
         
-        JPanel panelPinos = new JPanel();
-        panelPinos.setLayout(new GridLayout(2,2));
+        panelPinos = new JPanel();
+        panelPinos.setLayout(new GridLayout(2,3));
         panelPinos.setBackground(Cor.CINZA.color);
 
-        retryPane.setLayout(new FlowLayout(1));
+        retryPane.setLayout(new FlowLayout(FlowLayout.CENTER));
         retryPane.setBackground(new Color(60, 65, 70));
         for (int i = 0; i < QuantidadePinos; i++) {
             boolean achou = false;
@@ -133,50 +136,78 @@ public class MiniSenha {
     public void JogoPrincipal(JFrame frame){
         pinos = new PinoColorido[6];
         JPanel contentPane = new JPanel();
+        JPanel dicaPanel = new JPanel();
         Container container = frame.getContentPane();
+        
+        
         if(count == tentativas){
             container.removeAll();
-            
-         }else{
-            container.remove(deNovo);
-            container.remove(numTentativas);
-         }
-         
-            contentPane.setLayout(new FlowLayout());
-            container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
-
-            if (modoTeste) {
-                JFrame modotesteJFrame = new JFrame("Resultado");
-                Container senhaPane = modotesteJFrame.getContentPane();
-                senhaPane.setLayout(new FlowLayout());
-                JLabel senhaLabel = new JLabel("A senha é:" + getSenha()[0].getCor());
-                senhaPane.add(senhaLabel);
-                for (int i = 1; i < QuantidadePinos; i++) {
-                    JLabel senhaRestante = new JLabel("" + getSenha()[i].getCor());
-                    senhaPane.add(senhaRestante);
-                }
-                modotesteJFrame.pack();
-                modotesteJFrame.setVisible(true);
-            }
+            dicaPanel.setLayout(new GridLayout(2,3));
             for (int i = 0; i < QuantidadePinos; i++) {
                 PinoColorido pino = new PinoColorido();
                 pinos[i] = pino;
-                JButton button = new JButton("⬤");
-                button.addActionListener(event -> button.setForeground(pino.getNextColor()));
-                button.setBackground(new Color(60, 65, 70));
-                contentPane.add(button);
+                JLabel dot = new JLabel("●");
+                dicaPanel.add(dot);
             }
+        }else{
+            if (count == tentativas-1){
+                //se removeAll(), ele atualiza a dica, mas tambem atualiza as cores, se não, ele não atualiza nenhum dos dois
+                container.removeAll();
+                
+                /*container.remove(dicaPanel);
+                container.remove(deNovo);
+                container.remove(numTentativas);
+                */
+            }
+            
+            //container.add(dicaPanel);   
+            container.remove(deNovo);
+            container.remove(numTentativas);
+            //container.add(aux);
+            container.add(panelPinos);
+         }
+
+        contentPane.setLayout(new FlowLayout());
+        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+
+        if (modoTeste) {
+            JFrame modotesteJFrame = new JFrame("Resultado");
+            Container senhaPane = modotesteJFrame.getContentPane();
+            senhaPane.setLayout(new FlowLayout());
+            JLabel senhaLabel = new JLabel("A senha é:" + getSenha()[0].getCor());
+            senhaPane.add(senhaLabel);
+            for (int i = 1; i < QuantidadePinos; i++) {
+                JLabel senhaRestante = new JLabel("" + getSenha()[i].getCor());
+                senhaPane.add(senhaRestante);
+            }
+            modotesteJFrame.pack();
+            modotesteJFrame.setVisible(true);
+        }
+        
+        for (int i = 0; i < QuantidadePinos; i++) {
+            PinoColorido pino = new PinoColorido();
+            pinos[i] = pino;
+            JButton button = new JButton("⬤");
+            button.addActionListener(event -> button.setForeground(pino.getNextColor()));
+            button.setBackground(new Color(60, 65, 70));
+            contentPane.add(button);
+        }
+        
             JButton Verificar = new JButton("Chutar!");
             Verificar.addActionListener(event -> verificarResultado(pinos, frame));
             Verificar.setBackground(new Color(150, 150, 150));
             
+
+            if (count < tentativas){
+                contentPane.add(panelPinos);
+                dicaPanel.setVisible(false);
+            }
+            
+            contentPane.add(dicaPanel);
             contentPane.add(Verificar);
             container.add(contentPane);
             frame.pack();
             frame.setVisible(true);
-        }
-    
 
-
-        
     }
+}
