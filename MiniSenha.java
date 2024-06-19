@@ -24,6 +24,7 @@ public class MiniSenha {
     private JButton deNovo;
     private JLabel numTentativas;
     private JPanel panelPinos;
+    private Container retryPane;
 
     public MiniSenha(JFrame frame, boolean teste, int quantidade, int tentativas) {
         this.modoTeste = teste;
@@ -86,7 +87,7 @@ public class MiniSenha {
 
     public void TentarDeNovo(JFrame frame){
         count--;
-        Container retryPane = frame.getContentPane();
+        retryPane = frame.getContentPane();
         frame.setTitle("Mini Senha");
         
         panelPinos = new JPanel();
@@ -138,6 +139,7 @@ public class MiniSenha {
         JPanel dicaPanel = new JPanel();
         Container container = frame.getContentPane();
         
+        
         if(count == tentativas){
             container.removeAll();
             dicaPanel.setLayout(new GridLayout(2,3));
@@ -148,9 +150,20 @@ public class MiniSenha {
                 dicaPanel.add(dot);
             }
         }else{
-            container.remove(dicaPanel);   
+            if (count == tentativas-1){
+                //se removeAll(), ele atualiza a dica, mas tambem atualiza as cores, se não, ele não atualiza nenhum dos dois
+                container.removeAll();
+                
+                /*container.remove(dicaPanel);
+                container.remove(deNovo);
+                container.remove(numTentativas);
+                */
+            }
+            
+            //container.add(dicaPanel);   
             container.remove(deNovo);
             container.remove(numTentativas);
+            //container.add(aux);
             container.add(panelPinos);
          }
 
@@ -170,6 +183,7 @@ public class MiniSenha {
             modotesteJFrame.pack();
             modotesteJFrame.setVisible(true);
         }
+        
         for (int i = 0; i < QuantidadePinos; i++) {
             PinoColorido pino = new PinoColorido();
             pinos[i] = pino;
