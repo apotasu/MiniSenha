@@ -15,6 +15,7 @@ public class MiniSenha {
     private Config config;
     private PinoColorido[] senha;
     private PinoColorido[] pinos;
+    private Tentativa[] tentativas;
     private boolean modoTeste;
     private int QuantidadePinos;
     private int count;
@@ -23,12 +24,11 @@ public class MiniSenha {
         this.modoTeste = teste;
         this.QuantidadePinos = quantidade;
         this.senha = new PinoColorido[quantidade];
-        this.config = new Config(true, frame);
+        this.tentativas = new Tentativa[tentativas];
+        this.config = new Config();
         this.count = tentativas;
-        if (config.getNumJogadores()) {
-            gerarSenha();
-            JogoPrincipal(frame);
-        }
+        gerarSenha();
+        JogoPrincipal(frame);
     }
 
     private void gerarSenha() {
@@ -41,7 +41,7 @@ public class MiniSenha {
         }
         System.out.println("Senha gerada:");
         for (int i = 0; i < QuantidadePinos; i++) {
-            System.out.println(this.senha[i].getCor());
+            System.out.println(this.senha[i].getColor());
         }
     }
 
@@ -65,7 +65,7 @@ public class MiniSenha {
         Resultados resultado = new Resultados(frame);
         // Verificar se o jogador acertou a senha
         for (int i = 0; i < QuantidadePinos; i++) {
-            if (pinos[i].getCor() != senha[i].getCor()) {
+            if (pinos[i].getColor() != senha[i].getColor()) {
                 if (count == 0) {
                     resultado.ResultadoDerrota();
                     return;
@@ -95,10 +95,10 @@ public class MiniSenha {
             JFrame modotesteJFrame = new JFrame("Resultado");
             Container senhaPane = modotesteJFrame.getContentPane();
             senhaPane.setLayout(new FlowLayout());
-            JLabel senhaLabel = new JLabel("A senha é:" + getSenha()[0].getCor());
+            JLabel senhaLabel = new JLabel("A senha é:" + getSenha()[0].getColor());
             senhaPane.add(senhaLabel);
             for (int i = 1; i < QuantidadePinos; i++) {
-                JLabel senhaRestante = new JLabel("" + getSenha()[i].getCor());
+                JLabel senhaRestante = new JLabel("" + getSenha()[i].getColor());
                 senhaPane.add(senhaRestante);
             }
             modotesteJFrame.pack();
@@ -136,7 +136,7 @@ public class MiniSenha {
         configPane.setBackground(new Color(60, 65, 70));
         for (int i = 0; i < QuantidadePinos; i++) {
             boolean achou = false;
-            if (pinos[i].getCor() == senha[i].getCor()) {
+            if (pinos[i].getColor() == senha[i].getColor()) {
                 JLabel pinoAcerto = new JLabel("●");
                 pinoAcerto.setBackground(new Color(60, 65, 70));
                 pinoAcerto.setForeground(new Color(0, 0, 0));
@@ -144,7 +144,7 @@ public class MiniSenha {
                 achou = true;
             } else {
                 for (int j = 0; j < i; j++) {
-                    if (pinos[i].getCor() == senha[j].getCor()) {
+                    if (pinos[i].getColor() == senha[j].getColor()) {
                         JLabel pinoAcerto = new JLabel("●");
                         pinoAcerto.setBackground(new Color(60, 65, 70));
                         pinoAcerto.setForeground(new Color(255, 255, 255));

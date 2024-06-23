@@ -1,9 +1,9 @@
 import java.awt.Color;
 
-public class PinoColorido {
-    private Cor color;
+public class PinoColorido extends Pino {
 
     public PinoColorido(){
+        super();
         color = Cor.PRETO;
     }
     public void setProxCor(){
@@ -34,15 +34,6 @@ public class PinoColorido {
     public Color getNextColor(){
         setProxCor();
         return this.color.color;
-    }
-
-    public Cor getCor(){
-        return this.color;
-    }
-
-    //For testing purrpurses ;33
-    public void setCor(Cor core){
-        this.color = core;
     }
 
 }
