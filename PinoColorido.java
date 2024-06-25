@@ -1,39 +1,23 @@
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 
-public class PinoColorido extends Pino {
+public class PinoColorido extends Pino{
 
-    public PinoColorido(){
-        super();
-        color = Cor.PRETO;
+    protected PinoColorido(Cor cor) {
+        super(cor);
     }
-    public void setProxCor(){
-        switch (color) {
-            case PRETO:
-                color = Cor.AMARELO;
-                break;
-            case AMARELO:
-                color = Cor.VERMELHO;
-                break;
-            case VERMELHO:
-                color = Cor.AZUL;
-                break;
-            case AZUL:
-                color = Cor.VERDE;
-                break;
-            case VERDE:
-                color = Cor.ROXO;
-                break;
-            case ROXO:
-                color = Cor.PRETO;
-                break;
-            default:
-                color = Cor.PRETO;
+
+    public static PinoColorido criaPinoColorido(String nomeCor){
+        Cor cor = Cores.getInstance().getCor(nomeCor);
+        if (cor == null){
+            throw new IllegalArgumentException("Cor invalida: "+nomeCor);
         }
+        return new PinoColorido(cor);
     }
 
-    public Color getNextColor(){
-        setProxCor();
-        return this.color.color;
+    @Override
+    public void acaoDoBotao(ActionEvent e) {
+        Cor novaCor = Cores.getInstance().proximaCor(getCor().getNomeCor());
+        setCor(novaCor);
     }
-
 }

@@ -1,18 +1,23 @@
 import java.awt.Color;
 
-public enum Cor {
-    VERMELHO(new Color(255, 0,0)),
-    VERDE(new Color(0, 255,0)),
-    AZUL(new Color(0, 0,255)),
-    AMARELO(new Color(242, 255,0)),
-    ROXO(new Color(110, 0,150)),
-    PRETO(new Color(0,0,0)),
-    BRANCO(new Color(255,255,255)),
-    CINZA(new Color(60,65,70));
+public class Cor {
+    private String nomeCor;
+    private Color cor;
 
-    public final Color color;
+    public Cor(String nomeCor, Color cor) {
+        this.nomeCor = nomeCor;
+        this.cor = cor;
+    }
 
-    Cor(Color color) {
-        this.color = color;
+    public String getNomeCor() {
+        return nomeCor;
+    }
+
+    public Color getCor() {
+        return cor;
+    }
+
+    public String toString(){
+        return getNomeCor();
     }
 }
